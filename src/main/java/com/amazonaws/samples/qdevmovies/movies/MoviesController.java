@@ -105,8 +105,15 @@ public class MoviesController {
                                        "Make sure the movie ID be a proper number!");
             model.addAttribute("searchError", true);
             return "error";
-        } catch (Exception e) {
-            logger.error("Arrr! Unexpected error during movie search: {}", e.getMessage(), e);
+        } catch (IllegalArgumentException e) {
+            logger.error("Arrr! Invalid argument provided in search: {}", e.getMessage());
+            model.addAttribute("title", "Invalid Search Input - Barnacle Alert!");
+            model.addAttribute("message", "Arrr! There be something wrong with yer search input, me hearty! " +
+                                       "Check yer parameters and try again!");
+            model.addAttribute("searchError", true);
+            return "error";
+        } catch (RuntimeException e) {
+            logger.error("Arrr! Runtime error during movie search: {}", e.getMessage(), e);
             model.addAttribute("title", "Search Error - Kraken Attack!");
             model.addAttribute("message", "Arrr! Something went wrong during the treasure hunt, me hearty! " +
                                        "The kraken might have attacked our search system. Try again later!");
