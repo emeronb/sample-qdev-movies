@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title} ?: 'Error - Shiver Me Timbers!'">Error - Shiver Me Timbers!</title>
+    <link rel="stylesheet" th:href="@{/css/movies.css}">
+    <style>
+        .error-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            background: rgba(231, 76, 60, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 2px solid rgba(231, 76, 60, 0.3);
+            text-align: center;
+        }
+        
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #e74c3c;
+        }
+        
+        .error-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #e74c3c;
+            font-weight: 700;
+        }
+        
+        .error-message {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .search-params {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #ccc;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,123,255,0.5);
+            background: linear-gradient(45deg, #0056b3, #004085);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, #6c757d, #495057);
+            box-shadow: 0 4px 15px rgba(108,117,125,0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(45deg, #495057, #343a40);
+            box-shadow: 0 8px 25px rgba(108,117,125,0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .error-container {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .error-message {
+                font-size: 1.1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-container">
+            <div class="error-icon">🏴‍☠️</div>
+            <h1 class="error-title" th:text="${title} ?: 'Arrr! Something Went Wrong!'">Arrr! Something Went Wrong!</h1>
+            <p class="error-message" th:text="${message} ?: 'Shiver me timbers! An unexpected error occurred during yer voyage!'">
+                Shiver me timbers! An unexpected error occurred during yer voyage!
+            </p>
+            
+            <!-- Show search parameters if this is a search error -->
+            <div th:if="${searchError and searchParams}" class="search-params">
+                <strong>Search Parameters:</strong> <span th:text="${searchParams}">None provided</span>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="/movies" class="btn">🎬 Back to All Movies</a>
+                <a href="/movies" class="btn btn-secondary">🔍 Try New Search</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
